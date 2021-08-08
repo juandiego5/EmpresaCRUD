@@ -1,0 +1,20 @@
+﻿.error {
+	color: #F00;
+	background-color: #FFF;
+}
+
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form {
+	width: 450px;
+}
+
+.btnCenter{
+	width: 140px; /* Para que no se rompa en dos líneas, y lo translade tal cual. */
+	margin-left: 50%;
+	transform: translateX(-50%);
+}

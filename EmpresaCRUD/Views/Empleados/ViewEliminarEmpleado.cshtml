@@ -1,0 +1,89 @@
+﻿@section css
+{
+	@Styles.Render("~/Content/myStyleSheet.css")
+}
+
+@model EmpresaCRUD.Models.consultarEmpleado_Result
+
+<input type="hidden" id="idEmpleado" value="@Model.idEmpleado" />
+<input type="hidden" id="fechaPredeterminado" value="@Model.fechaContratacionEmpleado" />
+<input type="hidden" id="estadoPredeterminado" value="@Model.estadoEmpleado" />
+
+
+<div class="container">
+	<div class="center">
+		<form id="formEliminarEmpleado" class="form">
+			<div class="form-group">
+				<h1>Eliminar empleado</h1>
+			</div>
+
+			<div class="form-group row">
+				<label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombre:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nombreEmpleado" name="nombreEmpleado" value="@Model.nombreEmpleado" readonly />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="apellidosEmpleado" class="col-sm-2 col-form-label">Apellidos:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="apellidosEmpleado" name="apellidosEmpleado" value="@Model.apellidosEmpleado" readonly />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="cedulaEmpleado" class="col-sm-2 col-form-label">Cédula:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="cedulaEmpleado" name="cedulaEmpleado" value="@Model.cedulaEmpleado" readonly />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="generoEmpleado" class="col-sm-2 col-form-label">Género:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="generoEmpleado" name="generoEmpleado" value="@Model.generoEmpleado" readonly />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="fechaContratacionEmpleado" class="col-sm-2 col-form-label">Fecha contratación:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="fechaContratacionEmpleado" name="fechaContratacionEmpleado" readonly />
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="direccionEmpleado" class="col-sm-2 col-form-label">Dirección:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="direccionEmpleado" name="direccionEmpleado" placeholder="Ingresa la dirección" rows="3" readonly>@Model.direccionEmpleado</textarea>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Estado:</label>
+				<div class="col-sm-10">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="estadoEmpleado" id="estadoEmpleado1" value="true" />
+						<label class="form-check-label" for="estadoEmpleado1">Activo</label>
+
+						<input class="form-check-input" type="radio" name="estadoEmpleado" id="estadoEmpleado2" value="false" />
+						<label class="form-check-label" for="estadoEmpleado2">Inactivo</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="nombrePuesto" class="col-sm-2 col-form-label">Puesto:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="nombrePuesto" name="nombrePuesto" value="@Model.nombrePuesto" readonly />
+				</div>
+			</div>
+
+			<input class="btn btn-danger" type="button" id="btnEliminar" value="Eliminar" />
+		</form>
+	</div>
+</div>
+
+@section scripts{
+	<script src="~/Scripts/Empleados/ViewEliminarEmpleado.js"></script>
+}

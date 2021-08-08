@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EmpresaCRUDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreEmpleado" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="apellidosEmpleado" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="cedulaEmpleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="generoEmpleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fechaContratacionEmpleado" Type="date" Nullable="false" />
+          <Property Name="direccionEmpleado" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estadoEmpleado" Type="bit" Nullable="false" />
+          <Property Name="idPuesto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Puestos">
+          <Key>
+            <PropertyRef Name="idPuesto" />
+          </Key>
+          <Property Name="idPuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="areaPuesto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombrePuesto" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Empleados_Puestos">
+          <End Role="Puestos" Type="Self.Puestos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puestos">
+              <PropertyRef Name="idPuesto" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="agregarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="apellidosEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="cedulaEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="generoEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="fechaContratacionEmpleado" Type="date" Mode="In" />
+          <Parameter Name="direccionEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="estadoEmpleado" Type="bit" Mode="In" />
+          <Parameter Name="idPuesto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="consultarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="eliminarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="listaEmpleados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="listaPuestos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="modificarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEmpleado" Type="int" Mode="In" />
+          <Parameter Name="nombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="apellidosEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="cedulaEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="generoEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="fechaContratacionEmpleado" Type="date" Mode="In" />
+          <Parameter Name="direccionEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="estadoEmpleado" Type="bit" Mode="In" />
+          <Parameter Name="idPuesto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="retornaEmpleadoId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idEmpleado" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="EmpresaCRUDModelStoreContainer">
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Puestos" EntityType="Self.Puestos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Empleados_Puestos" Association="Self.FK_Empleados_Puestos">
+            <End Role="Puestos" EntitySet="Puestos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpresaCRUDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="idEmpleado" />
+          </Key>
+          <Property Name="idEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreEmpleado" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidosEmpleado" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cedulaEmpleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="generoEmpleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaContratacionEmpleado" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="direccionEmpleado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estadoEmpleado" Type="Boolean" Nullable="false" />
+          <Property Name="idPuesto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Puestos" Relationship="Self.FK_Empleados_Puestos" FromRole="Empleados" ToRole="Puestos" />
+        </EntityType>
+        <EntityType Name="Puestos">
+          <Key>
+            <PropertyRef Name="idPuesto" />
+          </Key>
+          <Property Name="idPuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="areaPuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombrePuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Puestos" FromRole="Puestos" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_Empleados_Puestos">
+          <End Role="Puestos" Type="Self.Puestos" Multiplicity="1" />
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Puestos">
+              <PropertyRef Name="idPuesto" />
+            </Principal>
+            <Dependent Role="Empleados">
+              <PropertyRef Name="idPuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EmpresaCRUDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Puestos" EntityType="Self.Puestos" />
+          <AssociationSet Name="FK_Empleados_Puestos" Association="Self.FK_Empleados_Puestos">
+            <End Role="Puestos" EntitySet="Puestos" />
+            <End Role="Empleados" EntitySet="Empleados" />
+          </AssociationSet>
+          <FunctionImport Name="agregarEmpleado">
+            <Parameter Name="nombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="apellidosEmpleado" Mode="In" Type="String" />
+            <Parameter Name="cedulaEmpleado" Mode="In" Type="String" />
+            <Parameter Name="generoEmpleado" Mode="In" Type="String" />
+            <Parameter Name="fechaContratacionEmpleado" Mode="In" Type="DateTime" />
+            <Parameter Name="direccionEmpleado" Mode="In" Type="String" />
+            <Parameter Name="estadoEmpleado" Mode="In" Type="Boolean" />
+            <Parameter Name="idPuesto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="consultarEmpleado" ReturnType="Collection(EmpresaCRUDModel.consultarEmpleado_Result)">
+          <Parameter Name="idEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="eliminarEmpleado">
+          <Parameter Name="idEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="listaEmpleados" ReturnType="Collection(EmpresaCRUDModel.listaEmpleados_Result)" />
+          <FunctionImport Name="modificarEmpleado">
+            <Parameter Name="idEmpleado" Mode="In" Type="Int32" />
+            <Parameter Name="nombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="apellidosEmpleado" Mode="In" Type="String" />
+            <Parameter Name="cedulaEmpleado" Mode="In" Type="String" />
+            <Parameter Name="generoEmpleado" Mode="In" Type="String" />
+            <Parameter Name="fechaContratacionEmpleado" Mode="In" Type="DateTime" />
+            <Parameter Name="direccionEmpleado" Mode="In" Type="String" />
+            <Parameter Name="estadoEmpleado" Mode="In" Type="Boolean" />
+            <Parameter Name="idPuesto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="listaPuestos" ReturnType="Collection(EmpresaCRUDModel.listaPuestos_Result)" />
+          <FunctionImport Name="retornaEmpleadoId" ReturnType="Collection(EmpresaCRUDModel.retornaEmpleadoId_Result)">
+            <Parameter Name="idEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="consultarEmpleado_Result">
+          <Property Type="Int32" Name="idEmpleado" Nullable="false" />
+          <Property Type="String" Name="nombreEmpleado" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidosEmpleado" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="cedulaEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="generoEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="fechaContratacionEmpleado" Nullable="false" />
+          <Property Type="String" Name="direccionEmpleado" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="estadoEmpleado" Nullable="false" />
+          <Property Type="Int32" Name="idPuesto" Nullable="false" />
+          <Property Type="String" Name="nombrePuesto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="listaEmpleados_Result">
+          <Property Type="Int32" Name="idEmpleado" Nullable="false" />
+          <Property Type="String" Name="nombreEmpleado" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidosEmpleado" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="cedulaEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="generoEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="fechaContratacionEmpleado" Nullable="false" />
+          <Property Type="String" Name="direccionEmpleado" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="estadoEmpleado" Nullable="false" />
+          <Property Type="Int32" Name="idPuesto" Nullable="false" />
+          <Property Type="String" Name="nombrePuesto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="listaPuestos_Result">
+          <Property Type="Int32" Name="idPuesto" Nullable="false" />
+          <Property Type="String" Name="areaPuesto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nombrePuesto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="retornaEmpleadoId_Result">
+          <Property Type="Int32" Name="idEmpleado" Nullable="false" />
+          <Property Type="String" Name="nombreEmpleado" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="apellidosEmpleado" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="cedulaEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="generoEmpleado" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="fechaContratacionEmpleado" Nullable="false" />
+          <Property Type="String" Name="direccionEmpleado" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="estadoEmpleado" Nullable="false" />
+          <Property Type="Int32" Name="idPuesto" Nullable="false" />
+          <Property Type="Int32" Name="idPuesto1" Nullable="false" />
+          <Property Type="String" Name="areaPuesto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nombrePuesto" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EmpresaCRUDModelStoreContainer" CdmEntityContainer="EmpresaCRUDEntities">
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="EmpresaCRUDModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="apellidosEmpleado" ColumnName="apellidosEmpleado" />
+                <ScalarProperty Name="cedulaEmpleado" ColumnName="cedulaEmpleado" />
+                <ScalarProperty Name="generoEmpleado" ColumnName="generoEmpleado" />
+                <ScalarProperty Name="fechaContratacionEmpleado" ColumnName="fechaContratacionEmpleado" />
+                <ScalarProperty Name="direccionEmpleado" ColumnName="direccionEmpleado" />
+                <ScalarProperty Name="estadoEmpleado" ColumnName="estadoEmpleado" />
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Puestos">
+            <EntityTypeMapping TypeName="EmpresaCRUDModel.Puestos">
+              <MappingFragment StoreEntitySet="Puestos">
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="areaPuesto" ColumnName="areaPuesto" />
+                <ScalarProperty Name="nombrePuesto" ColumnName="nombrePuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="agregarEmpleado" FunctionName="EmpresaCRUDModel.Store.agregarEmpleado" />
+          <FunctionImportMapping FunctionImportName="consultarEmpleado" FunctionName="EmpresaCRUDModel.Store.consultarEmpleado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmpresaCRUDModel.consultarEmpleado_Result">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="apellidosEmpleado" ColumnName="apellidosEmpleado" />
+                <ScalarProperty Name="cedulaEmpleado" ColumnName="cedulaEmpleado" />
+                <ScalarProperty Name="generoEmpleado" ColumnName="generoEmpleado" />
+                <ScalarProperty Name="fechaContratacionEmpleado" ColumnName="fechaContratacionEmpleado" />
+                <ScalarProperty Name="direccionEmpleado" ColumnName="direccionEmpleado" />
+                <ScalarProperty Name="estadoEmpleado" ColumnName="estadoEmpleado" />
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="nombrePuesto" ColumnName="nombrePuesto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="eliminarEmpleado" FunctionName="EmpresaCRUDModel.Store.eliminarEmpleado" />
+          <FunctionImportMapping FunctionImportName="listaEmpleados" FunctionName="EmpresaCRUDModel.Store.listaEmpleados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmpresaCRUDModel.listaEmpleados_Result">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="apellidosEmpleado" ColumnName="apellidosEmpleado" />
+                <ScalarProperty Name="cedulaEmpleado" ColumnName="cedulaEmpleado" />
+                <ScalarProperty Name="generoEmpleado" ColumnName="generoEmpleado" />
+                <ScalarProperty Name="fechaContratacionEmpleado" ColumnName="fechaContratacionEmpleado" />
+                <ScalarProperty Name="direccionEmpleado" ColumnName="direccionEmpleado" />
+                <ScalarProperty Name="estadoEmpleado" ColumnName="estadoEmpleado" />
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="nombrePuesto" ColumnName="nombrePuesto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="modificarEmpleado" FunctionName="EmpresaCRUDModel.Store.modificarEmpleado" />
+          <FunctionImportMapping FunctionImportName="listaPuestos" FunctionName="EmpresaCRUDModel.Store.listaPuestos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmpresaCRUDModel.listaPuestos_Result">
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="areaPuesto" ColumnName="areaPuesto" />
+                <ScalarProperty Name="nombrePuesto" ColumnName="nombrePuesto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="retornaEmpleadoId" FunctionName="EmpresaCRUDModel.Store.retornaEmpleadoId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EmpresaCRUDModel.retornaEmpleadoId_Result">
+                <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+                <ScalarProperty Name="nombreEmpleado" ColumnName="nombreEmpleado" />
+                <ScalarProperty Name="apellidosEmpleado" ColumnName="apellidosEmpleado" />
+                <ScalarProperty Name="cedulaEmpleado" ColumnName="cedulaEmpleado" />
+                <ScalarProperty Name="generoEmpleado" ColumnName="generoEmpleado" />
+                <ScalarProperty Name="fechaContratacionEmpleado" ColumnName="fechaContratacionEmpleado" />
+                <ScalarProperty Name="direccionEmpleado" ColumnName="direccionEmpleado" />
+                <ScalarProperty Name="estadoEmpleado" ColumnName="estadoEmpleado" />
+                <ScalarProperty Name="idPuesto" ColumnName="idPuesto" />
+                <ScalarProperty Name="idPuesto1" ColumnName="idPuesto1" />
+                <ScalarProperty Name="areaPuesto" ColumnName="areaPuesto" />
+                <ScalarProperty Name="nombrePuesto" ColumnName="nombrePuesto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
